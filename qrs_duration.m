@@ -1,4 +1,4 @@
-function qrs_duration = mean_QRS(segnale) 
+function durata_QRS = qrs_duration(segnale) 
 
  Q=zeros (1, length(segnale));
  xQ=zeros (1, length(segnale));
@@ -9,31 +9,37 @@ function qrs_duration = mean_QRS(segnale)
 
  for j=1:size(segnale,1) %mi da il numero di righe (length mi da il numero di colonne)
           
-     %thr2=find_thr( - segnale ( j , :) , -5 );
+     %thr2=find_thr( - segnale ( j , :) , 0.5 );
      
-     [Qj, xQj] = findpeaks ( - segnale ( j , 1: round( length(segnale)/ 2 )) , 'MinPeakHeight',  0   );
+     %tutti i picchi che vanno da 0 al picco R delo j-esimo battito
+     [Qj, xQj] = findpeaks ( - segnale ( j , 1: round( length(segnale)/ 20 ))  );
     
+     %valore del picco Q del j-esimo battito
      Q(j)= -Qj(end);
+     
+     %valore dell'ascissa del picco Q del j-esimo battito
      xQ(j)= xQj(end);
     
 %      hold on
-%      plot(xQj (end) , z(j), '*' , 'Color' , 'r')
+%      plot(xQj (j) , Q(j), '*' , 'Color' , 'r')
        
      
      %thr2=find_thr(  segnale ( j , :) , -1 );
     
-     [Sj, xSj] = findpeaks ( - segnale ( j ,  round ( length(segnale)/ 2 ): end )  );
+     [Sj, xSj] = findpeaks ( - segnale ( j ,  round ( length(segnale)/ 20 ): end )  );
      
      S(j)= -Sj(1);
-     xS(j)= xSj(1)+round ( length(segnale)/ 2 );
+     xS(j)= xSj(1) + round ( length(segnale)/ 20 );
      
 %      hold on
-%      plot(xSj (1) + length(segnale)/ 2 , w(j), '*' , 'Color' , 'b') 
-     
+%      plot(xSj (j) + round ( length(segnale)/ 2) , S(j), '*' , 'Color' , 'r')
+%        
+%      
 %      hold off
       
-end
+ end
 
-qrs_duration= mean( xS - xQ )
+xS - xQ;
+durata_QRS = mean( xS - xQ )
 
 end
