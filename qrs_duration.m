@@ -39,7 +39,7 @@ function durata_QRS = qrs_duration(segnale)
       
  end
 
-xS - xQ;
-durata_QRS = mean( xS - xQ )
+
+durata_QRS = xS - xQ ;
 
 end
