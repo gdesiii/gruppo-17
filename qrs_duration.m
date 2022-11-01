@@ -12,8 +12,8 @@ function durata_QRS = qrs_duration(segnale)
      %thr2=find_thr( - segnale ( j , :) , 0.5 );
      
      %tutti i picchi che vanno da 0 al picco R delo j-esimo battito
-     [Qj, xQj] = findpeaks ( - segnale ( j , 1: round( length(segnale(1,:))/ 2 ))  );
-    
+     %[Qj, xQj] = findpeaks ( - segnale ( j , 1: round( length(segnale(1,:))/ 2 ))  );
+    [Qj, xQj] = find_ecg_peaks (-(segnale(j , 1: round( length(segnale(1,:))/ 2 ))), 1000, 0);
      %valore del picco Q del j-esimo battito
      Q(j)= -Qj(end);
      
@@ -25,9 +25,9 @@ function durata_QRS = qrs_duration(segnale)
        
      
      %thr2=find_thr(  segnale ( j , :) , -1 );
+    %[Sj, xSj] = findpeaks ( - segnale ( j ,  round ( length(segnale(1,:))/ 2 ): end )  );
+     [Sj, xSj] = find_ecg_peaks (-(segnale(j , round( length(segnale(1,:))/ 2 ):end )), 1000, 0);
     
-     [Sj, xSj] = findpeaks ( - segnale ( j ,  round ( length(segnale(1,:))/ 2 ): end )  );
-     
      S(j)= -Sj(1);
      xS(j)= xSj(1) + round ( length(segnale(1,:))/ 2 );
      
