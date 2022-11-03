@@ -1,4 +1,4 @@
-function  stima_PDF(variabile_1, variabile_2,n_bins)
+function  confronto_PDF(variabile_1, variabile_2,n_bins)
 
 bin_edges = linspace(min([variabile_1 ; variabile_2 ]),max([variabile_1 ; variabile_2]), n_bins+1);
 
